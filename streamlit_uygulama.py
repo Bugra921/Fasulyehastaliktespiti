@@ -10,7 +10,7 @@ import cv2
 import streamlit as st
 
 
-MODEL = keras.models.load_model("mymodel.keras")
+MODEL = keras.models.load_model("mymodel.h5")
 CLASS_NAMES = ["angular_leaf_spot", "bean_rust", "healthy"]
 
 def read_file_as_image(data) -> np.ndarray:
