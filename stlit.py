@@ -69,8 +69,6 @@ def convert_png_to_jpg(img):
 
 # Tahmin yapma fonksiyonu
 def predict_image(img):
-    if img.format == 'PNG' or img.format.lower() == 'png':
-        img = convert_png_to_jpg(img)
     img = preprocess_image(np.array(img))
     with torch.no_grad():
         outputs = model(img)
@@ -90,9 +88,8 @@ if camera_input is not None:
     # Resmi PNG'den JPG'ye çevir
     if img.format == 'PNG':
         img = convert_png_to_jpg(img)
-    img_cv2 = np.array(img)
 
-    predicted_class, confidence = predict_image(img_cv2)
+    predicted_class, confidence = predict_image(img)
     st.write(f"Tahmin Edilen Sınıf: {class_names[predicted_class]}")
     st.write(f"İnanılırlık Yüzdesi: {confidence*100:.2f}%")
 
@@ -102,9 +99,8 @@ elif gallery_input is not None:
     # Resmi PNG'den JPG'ye çevir
     if img.format == 'PNG':
         img = convert_png_to_jpg(img)
-    img_cv2 = np.array(img)
 
-    predicted_class, confidence = predict_image(img_cv2)
+    predicted_class, confidence = predict_image(img)
     st.write(f"Tahmin Edilen Sınıf: {class_names[predicted_class]}")
     st.write(f"İnanılırlık Yüzdesi: {confidence*100:.2f}%")
 
